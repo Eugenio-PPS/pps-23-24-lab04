@@ -59,6 +59,6 @@ object Ex6TryModel:
 
   val result3 = for
     a <- exec(10)
-    b <- exec(new RuntimeException("error"))
+    b <- exec(throw new RuntimeException("error"))
     c <- exec(30)
   yield a + c

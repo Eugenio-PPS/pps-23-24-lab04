@@ -1,7 +1,5 @@
 package tasks.adts
 
-package u04lab
-
 /*  Exercise 1: 
  *  Complete the implementation of ComplexADT trait below, so that it passes
  *  the test in ComplexTest.
