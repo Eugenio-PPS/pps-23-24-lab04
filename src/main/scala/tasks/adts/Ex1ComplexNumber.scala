@@ -21,11 +21,14 @@ object Ex1ComplexNumbers:
 
   object BasicComplexADT extends ComplexADT:
 
+    case class ComplexNumber(re: Double, im: Double)
+
     // Change assignment below: should probably define a case class and use it?
-    type Complex = Nothing 
-    def complex(re: Double, im: Double): Complex = ???
+    opaque type Complex = ComplexNumber
+    def complex(re: Double, im: Double): Complex = ComplexNumber(re, im)
     extension (complex: Complex)
-      def re(): Double = ???
+      def re(): Double = complex match
+        case ComplexNumber(re, im) => re
       def im(): Double = ???
       def sum(other: Complex): Complex = ???
       def subtract(other: Complex): Complex = ???
