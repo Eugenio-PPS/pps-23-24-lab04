@@ -33,5 +33,6 @@ object Ex1ComplexNumbers:
         case ComplexNumber(re, im) => im
       def sum(other: Complex): Complex = (complex, other) match
         case (ComplexNumber(re1, im1), ComplexNumber(re2, im2)) => ComplexNumber(re1 + re2, im1 + im2)
-      def subtract(other: Complex): Complex = ???
+      def subtract(other: Complex): Complex = (complex, other) match
+        case (ComplexNumber(re1, im1), ComplexNumber(re2, im2)) => ComplexNumber(re1 - re2, im1 - im2)
       def asString(): String = ???
