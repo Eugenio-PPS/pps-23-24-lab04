@@ -29,7 +29,8 @@ object Ex1ComplexNumbers:
     extension (complex: Complex)
       def re(): Double = complex match
         case ComplexNumber(re, im) => re
-      def im(): Double = ???
+      def im(): Double = complex match
+        case ComplexNumber(re, im) => im
       def sum(other: Complex): Complex = ???
       def subtract(other: Complex): Complex = ???
       def asString(): String = ???
