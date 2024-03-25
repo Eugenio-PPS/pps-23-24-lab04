@@ -36,6 +36,7 @@ object Ex1ComplexNumbers:
       def subtract(other: Complex): Complex = (complex, other) match
         case (ComplexNumber(re1, im1), ComplexNumber(re2, im2)) => ComplexNumber(re1 - re2, im1 - im2)
       def asString(): String = complex match
-        case ComplexNumber(re, im) if im > 0  => s"$re + ${im}i"
         case ComplexNumber(re, _) if im == 0  => s"$re"
-        case ComplexNumber(re, im)            => s"$re - ${im}i"
+        case ComplexNumber(_, im) if re == 0  => s"${im}i"
+        case ComplexNumber(re, im) if im > 0  => s"$re + ${im}i"
+        case ComplexNumber(re, im)            => s"$re - ${im.abs}i"
