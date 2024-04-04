@@ -1,6 +1,7 @@
 package u04lab
-import u03.Sequences.* 
+import u03.Sequences.*
 import Sequence.*
+import u03.Optionals.Optional
 
 /*  Exercise 5: 
  *  - Generalise by ad-hoc polymorphism logAll, such that:
@@ -17,10 +18,25 @@ import Sequence.*
 
 object Ex5Traversable:
 
+  trait Traversable[A[_]]:
+    def traverse[T, R](f: T => R)(x: A[T]): Unit
+
+  given Traversable[Sequence] with
+    def traverse[T, R](f: T => R)(x: Sequence[T]): Unit = x match
+      case Sequence.Cons(h, t) =>
+        f(h)
+        traverse(f)(t)
+      case _                   => ()
+
+  given Traversable[Optional] with
+    def traverse[T, R](f: T => R)(x: Optional[T]): Unit = x match
+      case Optional.Just(v) => f(v)
+      case _                => ()
+
   def log[A](a: A): Unit = println("The next element is: "+a)
 
-  def logAll[A](seq: Sequence[A]): Unit = seq match
-    case Cons(h, t) => log(h); logAll(t)
-    case _ => ()
+  def logAll[A[_]](x: A[Any])(using t: Traversable[A]): Unit = t.traverse(y => log(y))(x)
 
-  
+@main def test =
+  u04lab.Ex5Traversable.logAll(Optional.Just(6))
+  u04lab.Ex5Traversable.logAll(Sequence.Cons(6, Sequence.Cons(3, Sequence.Nil())))
