@@ -37,6 +37,6 @@ object Ex5Traversable:
 
   def logAll[A[_]](x: A[Any])(using t: Traversable[A]): Unit = t.traverse(y => log(y))(x)
 
-@main def test =
+@main def test(): Unit =
   u04lab.Ex5Traversable.logAll(Optional.Just(6))
   u04lab.Ex5Traversable.logAll(Sequence.Cons(6, Sequence.Cons(3, Sequence.Nil())))
